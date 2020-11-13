@@ -20,7 +20,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	testutil.TestMain(m)
+	testutil.DiscardLogOutput(m)
 }
 
 const yamlConf = `bind_host: 127.0.0.1

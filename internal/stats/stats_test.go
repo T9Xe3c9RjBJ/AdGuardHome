@@ -12,7 +12,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	testutil.TestMain(m)
+	testutil.DiscardLogOutput(m)
 }
 
 func UIntArrayEquals(a, b []uint64) bool {

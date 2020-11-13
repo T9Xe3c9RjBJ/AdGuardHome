@@ -10,7 +10,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	testutil.TestMain(m)
+	testutil.DiscardLogOutput(m)
 }
 
 func TestError_Error(t *testing.T) {

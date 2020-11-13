@@ -13,7 +13,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	testutil.TestMain(m)
+	testutil.DiscardLogOutput(m)
 }
 
 func startHTTPServer(data string) (net.Listener, uint16) {
