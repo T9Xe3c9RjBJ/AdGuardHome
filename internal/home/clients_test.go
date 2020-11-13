@@ -2,6 +2,7 @@ package home
 
 import (
 	"net"
+	"net/http"
 	"os"
 	"testing"
 	"time"
@@ -206,7 +207,8 @@ func TestClientsAddExisting(t *testing.T) {
 	// now some more complicated stuff
 	// first, init a DHCP server with a single static lease
 	config := dhcpd.ServerConfig{
-		DBFilePath: "leases.db",
+		DBFilePath:   "leases.db",
+		HTTPRegister: func(string, string, func(http.ResponseWriter, *http.Request)) {},
 	}
 	defer func() { _ = os.Remove("leases.db") }()
 	clients.dhcpServer = dhcpd.Create(config)
