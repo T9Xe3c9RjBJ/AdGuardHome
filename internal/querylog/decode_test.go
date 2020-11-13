@@ -2,26 +2,25 @@ package querylog
 
 import (
 	"bytes"
-	"log"
 	"strings"
 	"testing"
 
-	aglog "github.com/AdguardTeam/golibs/log"
+	"github.com/AdguardTeam/golibs/log"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestDecode_decodeQueryLog(t *testing.T) {
+	// TODO(e.burkov): Put into testutil.
 	stdWriter := log.Writer()
-	stdLevel := aglog.GetLevel()
+	stdLevel := log.GetLevel()
 	t.Cleanup(func() {
 		log.SetOutput(stdWriter)
-		aglog.SetLevel(stdLevel)
+		log.SetLevel(stdLevel)
 	})
 
 	logOut := &bytes.Buffer{}
 	log.SetOutput(logOut)
-
-	aglog.SetLevel(aglog.DEBUG)
+	log.SetLevel(log.DEBUG)
 
 	testCases := []struct {
 		name string

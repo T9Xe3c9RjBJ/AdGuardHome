@@ -3,12 +3,11 @@ package dnsfilter
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"net"
 	"strings"
 	"testing"
 
-	aglog "github.com/AdguardTeam/golibs/log"
+	"github.com/AdguardTeam/golibs/log"
 	"github.com/AdguardTeam/urlfilter/rules"
 	"github.com/miekg/dns"
 	"github.com/stretchr/testify/assert"
@@ -141,14 +140,15 @@ func TestEtcHostsMatching(t *testing.T) {
 // SAFE BROWSING
 
 func TestSafeBrowsing(t *testing.T) {
+	// TODO(e.burkov): Put into testutil.
 	stdWriter := log.Writer()
-	stdLevel := aglog.GetLevel()
+	stdLevel := log.GetLevel()
 	t.Cleanup(func() {
 		log.SetOutput(stdWriter)
-		aglog.SetLevel(stdLevel)
+		log.SetLevel(stdLevel)
 	})
 
-	aglog.SetLevel(aglog.DEBUG)
+	log.SetLevel(log.DEBUG)
 	logOutput := &bytes.Buffer{}
 	log.SetOutput(logOutput)
 
@@ -342,14 +342,15 @@ func TestSafeSearchCacheGoogle(t *testing.T) {
 // PARENTAL
 
 func TestParentalControl(t *testing.T) {
+	// TODO(e.burkov): Put into testutil.
 	stdWriter := log.Writer()
-	stdLevel := aglog.GetLevel()
+	stdLevel := log.GetLevel()
 	t.Cleanup(func() {
 		log.SetOutput(stdWriter)
-		aglog.SetLevel(stdLevel)
+		log.SetLevel(stdLevel)
 	})
 
-	aglog.SetLevel(aglog.DEBUG)
+	log.SetLevel(log.DEBUG)
 	logOutput := &bytes.Buffer{}
 	log.SetOutput(logOutput)
 
