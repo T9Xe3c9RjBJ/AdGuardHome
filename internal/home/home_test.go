@@ -6,13 +6,13 @@ import (
 	"context"
 	"encoding/base64"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 	"testing"
 	"time"
 
+	"github.com/AdguardTeam/AdGuardHome/internal/testutil"
 	"github.com/AdguardTeam/dnsproxy/proxyutil"
 	"github.com/AdguardTeam/dnsproxy/upstream"
 	"github.com/miekg/dns"
@@ -20,13 +20,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	stdWriter := log.Writer()
-	defer func() {
-		log.SetOutput(stdWriter)
-	}()
-	log.SetOutput(ioutil.Discard)
-
-	os.Exit(m.Run())
+	testutil.TestMain(m)
 }
 
 const yamlConf = `bind_host: 127.0.0.1

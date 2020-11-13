@@ -12,27 +12,19 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
-	"log"
 	"net"
-	"os"
 	"sync"
 	"testing"
 	"time"
 
+	"github.com/AdguardTeam/AdGuardHome/internal/testutil"
 	"github.com/hugelgupf/socketpair"
 	"github.com/insomniacslk/dhcp/dhcpv4"
 	"github.com/insomniacslk/dhcp/dhcpv4/server4"
 )
 
 func TestMain(m *testing.M) {
-	stdWriter := log.Writer()
-	defer func() {
-		log.SetOutput(stdWriter)
-	}()
-	log.SetOutput(ioutil.Discard)
-
-	os.Exit(m.Run())
+	testutil.TestMain(m)
 }
 
 type handler struct {

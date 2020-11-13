@@ -10,7 +10,6 @@ import (
 	"encoding/pem"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"math/big"
 	"net"
 	"os"
@@ -19,6 +18,7 @@ import (
 	"testing"
 	"time"
 
+	"github.com/AdguardTeam/AdGuardHome/internal/testutil"
 	"github.com/AdguardTeam/AdGuardHome/internal/util"
 
 	"github.com/AdguardTeam/AdGuardHome/internal/dhcpd"
@@ -30,13 +30,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	stdWriter := log.Writer()
-	defer func() {
-		log.SetOutput(stdWriter)
-	}()
-	log.SetOutput(ioutil.Discard)
-
-	os.Exit(m.Run())
+	testutil.TestMain(m)
 }
 
 const (

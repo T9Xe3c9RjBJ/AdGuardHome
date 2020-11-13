@@ -3,23 +3,17 @@ package update
 import (
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net"
 	"net/http"
 	"os"
 	"testing"
 
+	"github.com/AdguardTeam/AdGuardHome/internal/testutil"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestMain(m *testing.M) {
-	stdWriter := log.Writer()
-	defer func() {
-		log.SetOutput(stdWriter)
-	}()
-	log.SetOutput(ioutil.Discard)
-
-	os.Exit(m.Run())
+	testutil.TestMain(m)
 }
 
 func startHTTPServer(data string) (net.Listener, uint16) {
