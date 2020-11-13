@@ -1,13 +1,7 @@
 package home
 
 import (
-	"net"
-	"net/http"
-	"os"
 	"testing"
-	"time"
-
-	"github.com/AdguardTeam/AdGuardHome/internal/dhcpd"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -186,9 +180,7 @@ func TestClientsAddExisting(t *testing.T) {
 	clients.testing = true
 	clients.Init(nil, nil, nil)
 
-	// some test variables
-	mac, _ := net.ParseMAC("aa:aa:aa:aa:aa:aa")
-	testIP := "1.2.3.4"
+	const testIP = "1.2.3.4"
 
 	// add a client
 	c = Client{
@@ -202,22 +194,6 @@ func TestClientsAddExisting(t *testing.T) {
 	// add an auto-client with the same IP - it's allowed
 	ok, err = clients.AddHost("1.1.1.1", "test", ClientSourceRDNS)
 	assert.True(t, ok)
-	assert.Nil(t, err)
-
-	// now some more complicated stuff
-	// first, init a DHCP server with a single static lease
-	config := dhcpd.ServerConfig{
-		DBFilePath:   "leases.db",
-		HTTPRegister: func(string, string, func(http.ResponseWriter, *http.Request)) {},
-	}
-	defer func() { _ = os.Remove("leases.db") }()
-	clients.dhcpServer = dhcpd.Create(config)
-	err = clients.dhcpServer.AddStaticLease(dhcpd.Lease{
-		HWAddr:   mac,
-		IP:       net.ParseIP(testIP).To4(),
-		Hostname: "testhost",
-		Expiry:   time.Now().Add(time.Hour),
-	})
 	assert.Nil(t, err)
 
 	// add a new client with the same IP as for a client with MAC
