@@ -24,7 +24,7 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	testutil.TestMain(m)
+	testutil.DiscardLogOutput(m)
 }
 
 type handler struct {
